@@ -1,0 +1,21 @@
+
+service: numpy-test
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+
+functions:
+  numpy:
+    runtime : python3.8
+    handler: handler.main
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    zip: true
+    slim: true
