@@ -2,10 +2,9 @@ import { useRageContext } from '../context/RageContext';
 import '../main.css';
 
 export default function Gauge() {
-    // const rage = useRageContext();
-    const rage = 80;
+    const rage = useRageContext();
     const gauge_ratio = rage/100;
-    const _width = 700- rage/100*700;
+    const _width = 400- rage/100*400;
     const gauge_bar={
         display: "flex",
         position: "absolute",
@@ -18,7 +17,7 @@ export default function Gauge() {
     const gauge_frame={
         display: "flex",
         position: "relative",
-        width: "700px",
+        width: "400px",
         height: "50px",
         background: "linear-gradient(to right, yellow, red)",
     };
