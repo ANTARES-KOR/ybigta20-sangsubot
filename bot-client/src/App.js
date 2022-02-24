@@ -1,20 +1,23 @@
-import RageProvider from "./context/RageContext";
-import Gauge from "./components/Gauge";
-import Viewer from "./components/Viewer";
-import PlayAudio from "./components/Audio";
-import Form from "./components/Form";
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import Main from 'components/Main';
+import RageProvider from 'context/RageContext';
+import { isMobile } from 'react-device-detect';
 
 function App() {
-  return (
-    <RageProvider>
-      <div className="App" style={{marginTop: '15%', display: "flex", justifyContent: 'center', alignItems: "center", flexDirection: 'column'}}>
-        <Gauge  />
-        <Viewer />
-        <PlayAudio />
-        <Form />
-      </div>
-    </RageProvider>
-  );
+	return (
+		<RageProvider>
+			<div
+				className={`container overflow-hidden bg-white min-w-sm 
+				max-w-md my-auto mx-auto max-h-[900px] min-h-[700px] drop-shadow-2xl h-screen 
+				${isMobile ? '' : 'rounded-2xl'}`}
+			>
+				<Header />
+				<Main />
+				<Footer />
+			</div>
+		</RageProvider>
+	);
 }
 
 export default App;
