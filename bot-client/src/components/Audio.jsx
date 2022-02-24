@@ -1,11 +1,14 @@
 import { useCallback } from "react";
 import { useRageContext } from "../context/RageContext";
+import audio1 from "./audio/정상수 - counting star 원본.mp3";
+import audio2 from "./audio/정상수 - counting star 완벽.mp3";
+import audio3 from "./audio/정상수 반말하지마라니.mp3";
 
 // 얘네같은경우에는 static하기때문에 function 안에다가 정의하기보다는 function 바깥에 정의해놓는게 좋음.
 // function 내부에 정의했을경우 PlayAudio component가 render 될 때 마다 새로운 객체가 생성되기 때문에 실행속도가 느려짐.
-const audio1 = new Audio("./audio/정상수 - counting star 원본.flac");
-const audio2 = new Audio("./audio/정상수 - counting star 완벽.flac");
-const audio3 = new Audio("./audio/정상수 반말하지마라니.flac");
+const music1 = new Audio(audio1);
+const music2 = new Audio(audio2);
+const music3 = new Audio(audio3);
 
 export default function PlayAudio() {
   const rage = useRageContext();
@@ -28,11 +31,11 @@ export default function PlayAudio() {
   // https://ko.reactjs.org/docs/hooks-reference.html#usecallback
   const playMusic = useCallback(() => {
     if (rage === 100 && banmal === 1) {
-      return audio1.play();
+      return music1.play();
     } else if (rage === 100 && banmal === 0) {
-      return audio2.play();
+      return music2.play();
     } else if (banmal === 1) {
-      return audio3.play();
+      return music3.play();
     }
   }, [rage]);
 
