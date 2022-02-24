@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-const DEFAULT_RAGE = 70;
+const DEFAULT_RAGE = 50;
 
 function reducer(state, action) {
 	switch (action.type) {
