@@ -1,6 +1,6 @@
 import RageProvider from "./context/RageContext";
 import Viewer from "./components/Viewer";
-import "tailwindcss/tailwind.css";
+import "./tailwind.css";
 
 function App() {
   return (
