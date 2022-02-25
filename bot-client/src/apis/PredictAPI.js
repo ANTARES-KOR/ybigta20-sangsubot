@@ -5,9 +5,13 @@ const instance = axios.create({
 });
 
 export const predict = async (text) => {
-	console.log('precict', text);
-	const response = instance.post('/predict', {
+	const response = await instance.post('/predict', {
 		text,
 	});
+	return response.data;
+};
+
+export const sentiment = async (text) => {
+	const response = await instance.post('/sentiment', { text });
 	return response.data;
 };

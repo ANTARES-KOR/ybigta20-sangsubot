@@ -1,6 +1,6 @@
-import { predict } from 'apis/PredictAPI';
 import { useCallback, useState } from 'react';
 import { useRageContext, useRageDispatchContext } from 'context/RageContext';
+import useSubmitHandler from 'hooks/useHandleSubmit';
 
 export default function Form() {
 	const rage = useRageContext();
@@ -17,21 +17,7 @@ export default function Form() {
 const NormalForm = () => {
 	const [value, setValue] = useState('');
 
-	const handleClick = useCallback(
-		async (e) => {
-			try {
-				const data = await predict(value);
-				// TODO : predict 결과에 따른 rage 상태 변경
-				// 오디오 실행 함수 만들어주자
-				if (data.cnt === 0) {
-					alert('반말하지마라!');
-				}
-			} catch (e) {
-				console.error(e);
-			}
-		},
-		[value]
-	);
+	const submit = useSubmitHandler(value);
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -43,7 +29,10 @@ const NormalForm = () => {
 				className="h-12 px-2 w-full border-2 rounded-lg  border-violet-300 focus:outline-none focus:border-violet-500"
 			/>
 			<button
-				onClick={handleClick}
+				onClick={async (e) => {
+					await submit(e);
+					setValue('');
+				}}
 				className="bg-violet-600 hover:bg-violet-700 focus:bg-violet-500 drop-shadow-lg rounded-lg h-12 w-full text-white text-md font-bold"
 			>
 				입력
