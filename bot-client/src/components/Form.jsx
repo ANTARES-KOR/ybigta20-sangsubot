@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useRageContext, useRageDispatchContext } from 'context/RageContext';
 import useSubmitHandler from 'hooks/useHandleSubmit';
 import { useVideoDispatchContext } from 'context/VideoContext';
+import toast from 'react-hot-toast';
 
 export default function Form() {
 	const rage = useRageContext();
@@ -32,7 +33,11 @@ const NormalForm = () => {
 			/>
 			<button
 				onClick={async (e) => {
-					await submit(e);
+					await toast.promise(submit(e), {
+						loading: '이해하는 중...',
+						success: '이해완료!',
+						error: '실패',
+					});
 					setValue('');
 				}}
 				className="bg-violet-600 hover:bg-violet-700 focus:bg-violet-500 drop-shadow-lg rounded-lg h-12 w-full text-white text-md font-bold"
