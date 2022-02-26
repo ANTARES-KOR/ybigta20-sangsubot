@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useRageContext, useRageDispatchContext } from 'context/RageContext';
 import useSubmitHandler from 'hooks/useHandleSubmit';
+import { useVideoDispatchContext } from 'context/VideoContext';
 
 export default function Form() {
 	const rage = useRageContext();
@@ -44,9 +45,13 @@ const NormalForm = () => {
 const HappyForm = () => {
 	const dispatch = useRageDispatchContext();
 
-	const handleClick = useCallback(() => {
-		dispatch({ type: 'RESET_RAGE' });
-	}, [dispatch]);
+	const handleClick = useCallback(
+		(e) => {
+			e.preventDefault();
+			dispatch({ type: 'RESET_RAGE' });
+		},
+		[dispatch]
+	);
 
 	return (
 		<button
@@ -60,10 +65,18 @@ const HappyForm = () => {
 
 const MadForm = () => {
 	const dispatch = useRageDispatchContext();
-	const handleClick = useCallback(() => {
-		dispatch({ type: 'RESET_RAGE' });
-		// TODO : 제압 영상 및 음원 효과
-	}, [dispatch]);
+	const vidDispatch = useVideoDispatchContext();
+	const handleClick = useCallback(
+		(e) => {
+			e.preventDefault();
+			vidDispatch({ type: 'RESET_MAD' });
+			setTimeout(() => {
+				vidDispatch({ type: 'DELETE_VID' });
+				dispatch({ type: 'RESET_RAGE' });
+			}, 5000);
+		},
+		[dispatch, vidDispatch]
+	);
 
 	return (
 		<button

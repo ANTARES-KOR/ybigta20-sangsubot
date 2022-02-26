@@ -1,13 +1,40 @@
+import { useVideoContext } from 'context/VideoContext';
 import useAudioByRageState from 'hooks/useAudioByRageState';
-import useImageByRageState from 'hooks/useImageByRageState';
+import useContentByRageState from 'hooks/useContentByRageState';
+import { useEffect } from 'react';
 
 export default function Viewer() {
-	const image = useImageByRageState();
+	const content = useContentByRageState();
+	const resetVideo = useVideoContext();
 	useAudioByRageState();
+
+	useEffect(() => {
+		console.log('video : ', resetVideo);
+	}, [resetVideo]);
+
+	if (!!resetVideo) {
+		return (
+			<div className=" h-[300px] rounded-lg overflow-hidden drop-shadow-lg">
+				<video className="w-full h-full" src={resetVideo.src} autoPlay />
+			</div>
+		);
+	}
 
 	return (
 		<div className=" h-[300px] rounded-lg overflow-hidden drop-shadow-lg">
-			<img className="w-full h-full" src={image.src} alt={image.name} />
+			{content.type === 'img' && (
+				<img className="w-full h-full" src={content.src} alt={content.name} />
+			)}
+			{content.type === 'vid' && (
+				<video
+					className="w-full h-full"
+					src={content.src}
+					alt={content.name}
+					autoPlay
+					loop={content.loop}
+					muted={content.muted}
+				/>
+			)}
 		</div>
 	);
 }
