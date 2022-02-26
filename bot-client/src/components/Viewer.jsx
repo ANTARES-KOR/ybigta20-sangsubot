@@ -1,16 +1,11 @@
 import { useVideoContext } from 'context/VideoContext';
 import useAudioByRageState from 'hooks/useAudioByRageState';
 import useContentByRageState from 'hooks/useContentByRageState';
-import { useEffect } from 'react';
 
 export default function Viewer() {
 	const content = useContentByRageState();
 	const resetVideo = useVideoContext();
 	useAudioByRageState();
-
-	useEffect(() => {
-		console.log('video : ', resetVideo);
-	}, [resetVideo]);
 
 	if (!!resetVideo) {
 		return (

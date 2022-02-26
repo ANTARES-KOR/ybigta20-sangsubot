@@ -24,9 +24,10 @@ const NormalForm = () => {
 		<div className="flex flex-col gap-4">
 			<input
 				type="text"
+				maxLength={30}
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
-				placeholder="할 말을 입력하세요.."
+				placeholder="할 말을 입력하세요.. (최대 40자)"
 				className="h-12 px-2 w-full border-2 rounded-lg  border-violet-300 focus:outline-none focus:border-violet-500"
 			/>
 			<button
